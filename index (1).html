@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sharuk Khan – Public Policy & Solid Waste Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #21262d;
+    --green: #3fb950;
+    --green-dim: #1a4228;
+    --amber: #d29922;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --card: #1c2128;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 2.5rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; max-width: 1100px; margin: 0 auto; width: 100%;
+    align-items: center;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--green-dim); color: var(--green);
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.3rem 0.9rem; border-radius: 2px;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(63,185,80,0.3);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 900; line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--green); }
+  .hero-desc {
+    color: var(--muted); font-size: 1rem; max-width: 480px;
+    margin-bottom: 2.5rem; line-height: 1.8;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block; padding: 0.75rem 1.8rem;
+    border-radius: 3px; font-size: 0.82rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; font-weight: 500;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--green); color: #0d1117;
+    border: 1px solid var(--green);
+  }
+  .btn-primary:hover { background: #56d364; }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--muted); }
+
+  /* Hero right – stats card */
+  .hero-card {
+    background: var(--card);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 2rem; position: relative; overflow: hidden;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--green), var(--accent), var(--amber));
+  }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700; color: var(--green);
+    display: block;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .hero-location {
+    display: flex; align-items: center; gap: 0.5rem;
+    color: var(--muted); font-size: 0.85rem; margin-top: 1.5rem;
+    padding-top: 1.5rem; border-top: 1px solid var(--border);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: inline-block; }
+
+  /* Animated grid lines */
+  .grid-lines {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: -1;
+  }
+  .grid-lines::after {
+    content: '';
+    position: absolute; inset: -50%;
+    background-image:
+      linear-gradient(rgba(63,185,80,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(63,185,80,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridDrift 20s linear infinite;
+  }
+  @keyframes gridDrift { to { transform: translate(60px, 60px); } }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 5rem 2.5rem; position: relative; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700; margin-bottom: 3rem;
+    line-height: 1.15;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 0.97rem; line-height: 1.85; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-pillars { display: flex; flex-direction: column; gap: 1rem; }
+  .pillar {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 3px solid var(--green); border-radius: 4px;
+    padding: 1rem 1.2rem;
+  }
+  .pillar-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); margin-bottom: 0.3rem; }
+  .pillar-desc { font-size: 0.82rem; color: var(--muted); }
+
+  /* ── EXPERIENCE ── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .tl-item { position: relative; margin-bottom: 2.5rem; }
+  .tl-dot {
+    position: absolute; left: -2.35rem; top: 0.35rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--green);
+  }
+  .tl-item:first-child .tl-dot { background: var(--green); }
+  .tl-meta { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+  .tl-role { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.2rem; }
+  .tl-org { font-size: 0.85rem; color: var(--accent); margin-bottom: 0.6rem; }
+  .tl-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+
+  /* ── SKILLS / CERTS ── */
+  #skills { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1.2rem 1.4rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--green); transform: translateY(-2px); }
+  .skill-issuer { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
+  .skill-name { font-size: 0.9rem; font-weight: 500; }
+
+  /* ── EDUCATION ── */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .edu-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1.8rem; transition: border-color 0.2s;
+  }
+  .edu-card:hover { border-color: var(--accent); }
+  .edu-degree { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .edu-inst { font-size: 0.85rem; color: var(--accent); margin-bottom: 0.5rem; }
+  .edu-note { font-size: 0.8rem; color: var(--muted); }
+
+  /* ── PUBLICATIONS / AWARDS ── */
+  .pub-list { display: flex; flex-direction: column; gap: 1.2rem; }
+  .pub-item {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1.5rem;
+    display: grid; grid-template-columns: auto 1fr; gap: 1.2rem;
+    align-items: start; transition: border-color 0.2s;
+  }
+  .pub-item:hover { border-color: var(--amber); }
+  .pub-icon { font-size: 1.4rem; margin-top: 0.1rem; }
+  .pub-title { font-weight: 500; font-size: 0.92rem; margin-bottom: 0.3rem; }
+  .pub-journal { font-size: 0.8rem; color: var(--muted); }
+
+  .awards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+  .award-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1.4rem; border-top: 2px solid var(--amber);
+    transition: transform 0.2s;
+  }
+  .award-card:hover { transform: translateY(-3px); }
+  .award-title { font-weight: 500; font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .award-event { font-size: 0.78rem; color: var(--muted); }
+
+  /* ── LANGUAGES ── */
+  #languages { background: var(--surface); border-top: 1px solid var(--border); }
+  .lang-grid { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  .lang-pill {
+    background: var(--card); border: 1px solid var(--border); border-radius: 100px;
+    padding: 0.5rem 1.4rem; font-size: 0.85rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .lang-level { font-size: 0.72rem; color: var(--muted); }
+
+  /* ── CONTACT ── */
+  #contact { border-top: 1px solid var(--border); }
+  .contact-inner {
+    max-width: 700px; margin: 0 auto; text-align: center;
+  }
+  .contact-inner .section-title { margin-bottom: 1rem; }
+  .contact-inner p { color: var(--muted); margin-bottom: 2.5rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem; color: var(--muted);
+  }
+
+  /* ── FADE-IN ── */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 5rem 1.5rem 3rem; }
+    .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">SK</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Certifications</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="grid-lines"></div>
+  <div class="hero-grid">
+    <div class="fade-in">
+      <span class="hero-tag">Public Policy · Tamil Nadu</span>
+      <h1>Sharuk<br/><em>Khan</em></h1>
+      <p class="hero-desc">
+        Tamil Nadu Chief Minister's Fellow 2024–26. Working at the intersection of Solid Waste Management, Circular Economy, and Rural–Urban Governance to build cleaner communities across Tamil Nadu.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+        <a href="#experience" class="btn btn-outline">View Work</a>
+      </div>
+    </div>
+    <div class="fade-in" style="transition-delay:0.15s">
+      <div class="hero-card">
+        <div class="hero-location" style="border-top:none; margin-top:0; padding-top:0;">
+          <span class="dot"></span>
+          Chennai, Tamil Nadu, India
+        </div>
+        <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.8rem;">
+          <div class="pillar" style="border-left-color:var(--green)">
+            <div class="pillar-title">Current Role</div>
+            <div class="pillar-desc">Tamil Nadu Chief Minister's Fellow 2024–26</div>
+          </div>
+          <div class="pillar" style="border-left-color:var(--accent)">
+            <div class="pillar-title">Focus Area</div>
+            <div class="pillar-desc">Solid Waste Management & Circular Economy</div>
+          </div>
+          <div class="pillar" style="border-left-color:var(--amber)">
+            <div class="pillar-title">Deputed At</div>
+            <div class="pillar-desc">Clean Tamil Nadu Company Limited (CTCL)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">Background</p>
+    <h2 class="section-title fade-in">Building Policy from<br/>the Ground Up</h2>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>I work in the area of <strong>Public Policy focused on Solid Waste Management</strong>, with experience spanning Rural and Urban Governance with State-level exposure in Tamil Nadu.</p>
+        <p>My journey began at the <strong>State Institute of Rural Development & Panchayat Raj, Tamil Nadu</strong>, where I built a strong foundation in Panchayat Raj Institutions, Capacity Building, and grassroots policy implementation.</p>
+        <p>Currently, as a <strong>Tamil Nadu Chief Minister's Fellow</strong>, I am deputed at Clean Tamil Nadu Company Limited (CTCL — a Government of Tamil Nadu Undertaking), designing and implementing Solid Waste Management Projects across Tamil Nadu.</p>
+        <p>My work spans segregation-based waste management, digital monitoring, resource recovery, circular economy initiatives, livelihood programs for sanitary workers, and stakeholder engagement with institutions including <strong>IIT Madras</strong> and <strong>Anna University</strong>.</p>
+      </div>
+      <div class="about-pillars fade-in" style="transition-delay:0.1s">
+        <div class="pillar">
+          <div class="pillar-title">Solid Waste Management</div>
+          <div class="pillar-desc">Segregation-based systems, DPR design, pilot project implementation</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">Circular Economy</div>
+          <div class="pillar-desc">Resource recovery, livelihood for sanitary workers, zero-waste models</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">Rural & Urban Governance</div>
+          <div class="pillar-desc">Panchayat Raj, capacity building, inter-departmental coordination</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-title">Digital Monitoring</div>
+          <div class="pillar-desc">Data-driven oversight of waste management infrastructure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label">Career</p>
+    <h2 class="section-title fade-in">Professional Experience</h2>
+    <div class="timeline fade-in">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">2024 – Present · Chennai, Tamil Nadu</div>
+        <div class="tl-role">Tamil Nadu Chief Minister's Fellow</div>
+        <div class="tl-org">Thooimai Mission — Special Programme Implementation Department, Govt. of Tamil Nadu</div>
+        <div class="tl-desc">Deputed at Clean Tamil Nadu Company Limited (CTCL). Leading design and implementation of Solid Waste Management projects: Detailed Project Reports, pilot project design, digital monitoring systems, circular economy initiatives, and livelihood programs for sanitary workers. Coordinating with IIT Madras, Anna University, and multiple government departments.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">2024 (4 months) · Chennai, Tamil Nadu</div>
+        <div class="tl-role">Tamil Nadu Chief Minister's Fellow</div>
+        <div class="tl-org">Directorate of Municipal Administration, Govt. of Tamil Nadu</div>
+        <div class="tl-desc">Worked on urban local body governance and municipal administration policy, gaining exposure to urban waste management frameworks and inter-departmental processes.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">~1 Year 8 Months</div>
+        <div class="tl-role">Faculty cum State Resource Person</div>
+        <div class="tl-org">State Institute of Rural Development and Panchayat Raj (SIRD&PR), Tamil Nadu</div>
+        <div class="tl-desc">Delivered training and capacity building for Panchayat Raj Institutions across Tamil Nadu. Served as State Resource Person for Swachh Bharat Mission (Grameen) implementation, certified by the Ministry of Jal Shakti.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <p class="section-label">Academia</p>
+    <h2 class="section-title fade-in">Education</h2>
+    <div class="edu-grid fade-in">
+      <div class="edu-card">
+        <div class="edu-degree">Post Graduate Certificate in Public Policy & Management</div>
+        <div class="edu-inst">Bharathidasan Institute of Management (BIM), Tiruchirappalli</div>
+        <div class="edu-note">Currently pursuing · Ongoing</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">Bachelor's Degree in Agriculture</div>
+        <div class="edu-inst">Anbil Dharmalingam Agricultural College and Research Institute (ADAC&RI), TNAU</div>
+        <div class="edu-note">Fine Arts, Music & Photography Society · NSS Volunteer · Basket Ball Player</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-inner">
+    <p class="section-label">Research</p>
+    <h2 class="section-title fade-in">Publications</h2>
+    <div class="pub-list fade-in">
+      <div class="pub-item">
+        <div class="pub-icon">📄</div>
+        <div>
+          <div class="pub-title">Delineation of Seasonal Rice Efficient Cropping Zones in Tamil Nadu, India</div>
+          <div class="pub-journal">International Journal of Environment and Climate Change</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-icon">📄</div>
+        <div>
+          <div class="pub-title">Delineation and Mapping of Soil Properties of Anbil Dharmalingam Agricultural College & Research Institute Farm, Tiruchirappalli</div>
+          <div class="pub-journal">International Journal of Theoretical and Applied Sciences</div>
+        </div>
+      </div>
+    </div>
+
+    <br/><br/>
+    <p class="section-label">Honours</p>
+    <h2 class="section-title fade-in">Awards & Recognition</h2>
+    <div class="awards-grid fade-in">
+      <div class="award-card">
+        <div class="award-title">🏆 Champion — BrainOBrain International</div>
+        <div class="award-event">Level 5 National Competition, Loyola College, Chennai</div>
+      </div>
+      <div class="award-card">
+        <div class="award-title">🥈 Runner — Quiz, Talentia 2k19</div>
+        <div class="award-event">State Level Intercollegiate Fest — AC&RI, TNAU, Madurai</div>
+      </div>
+      <div class="award-card">
+        <div class="award-title">🏆 Quizzard of Champfest 2k18</div>
+        <div class="award-event">St. Joseph College, Trichy</div>
+      </div>
+      <div class="award-card">
+        <div class="award-title">🥇 Winner — NSS State Level Meet 2018</div>
+        <div class="award-event">NSS Unit, St. Joseph College, Trichy</div>
+      </div>
+      <div class="award-card">
+        <div class="award-title">🥈 Runner-up — Mind Marathon</div>
+        <div class="award-event">Prabandhaz 2k17 National Management Symposium, TNAU Coimbatore</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label">Credentials</p>
+    <h2 class="section-title fade-in">Licenses & Certifications</h2>
+    <div class="skills-grid fade-in">
+      <div class="skill-card"><div class="skill-issuer">Bloomberg</div><div class="skill-name">Bloomberg Finance Fundamentals</div></div>
+      <div class="skill-card"><div class="skill-issuer">Bloomberg</div><div class="skill-name">Environmental Social Governance (ESG)</div></div>
+      <div class="skill-card"><div class="skill-issuer">Harvard Business Publishing Education</div><div class="skill-name">Finance Online Course</div></div>
+      <div class="skill-card"><div class="skill-issuer">Harvard Business Publishing Education</div><div class="skill-name">Mathematics for Management</div></div>
+      <div class="skill-card"><div class="skill-issuer">Harvard Business Publishing Education</div><div class="skill-name">Quantitative Methods</div></div>
+      <div class="skill-card"><div class="skill-issuer">Harvard Business Publishing Education</div><div class="skill-name">Management Communications — Writing in Business</div></div>
+      <div class="skill-card"><div class="skill-issuer">Harvard Business Publishing Education</div><div class="skill-name">Management Communications — Presenting in Business</div></div>
+      <div class="skill-card"><div class="skill-issuer">Harvard Business Publishing Education</div><div class="skill-name">Spreadsheet Modeling</div></div>
+      <div class="skill-card"><div class="skill-issuer">McKinsey & Company</div><div class="skill-name">McKinsey.org Forward Program</div></div>
+      <div class="skill-card"><div class="skill-issuer">Ministry of Jal Shakti, Govt. of India</div><div class="skill-name">SBM(G) — State Resource Person for Capacity Building</div></div>
+      <div class="skill-card"><div class="skill-issuer">NIRDPR</div><div class="skill-name">Implementing Good Agricultural Practices (IndGAP)</div></div>
+      <div class="skill-card"><div class="skill-issuer">The Research Wise</div><div class="skill-name">Data Analysis using R Programming</div></div>
+      <div class="skill-card"><div class="skill-issuer">Skill Nation</div><div class="skill-name">Business Intelligence using Microsoft Power BI</div></div>
+      <div class="skill-card"><div class="skill-issuer">CSC</div><div class="skill-name">Tally ERP 9</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="section-inner">
+    <p class="section-label">Communication</p>
+    <h2 class="section-title fade-in">Languages</h2>
+    <div class="lang-grid fade-in">
+      <div class="lang-pill">Tamil <span class="lang-level">Native / Bilingual</span></div>
+      <div class="lang-pill">English <span class="lang-level">Full Professional</span></div>
+      <div class="lang-pill">Hindi <span class="lang-level">Professional Working</span></div>
+      <div class="lang-pill">Urdu <span class="lang-level">Professional Working</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <p class="section-label">Let's Connect</p>
+    <h2 class="section-title fade-in">Get In Touch</h2>
+    <p class="fade-in">Interested in collaborations on public policy, solid waste management, or governance projects? I'd love to connect.</p>
+    <div class="contact-links fade-in">
+      <a href="https://www.linkedin.com/in/" target="_blank" class="btn btn-primary">LinkedIn Profile</a>
+      <a href="/cdn-cgi/l/email-protection#6f" class="btn btn-outline">Send Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Sharuk Khan · Tamil Nadu, India · Built with purpose.
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    })
